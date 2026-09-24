@@ -103,10 +103,10 @@ function renderAssets() {
           <div class="asset-bar"><span style="width:${percentage}%"></span></div>
           ${!isCash ? `
           <div class="asset-actions">
-            <button title="1000 € aus dieser Anlage entnehmen" onclick="moveMoney('${asset.id}', -1000)">−</button>
-            <button title="1000 € in diese Anlage investieren" onclick="moveMoney('${asset.id}', 1000)">+</button>
-            <input type="number" step="1" placeholder="Tausend (+/-)" class="custom-amount" id="custom-${asset.id}" onkeydown="if(event.key==='Enter') moveCustomMoney('${asset.id}')">
-            <button title="Betrag investieren/entnehmen" onclick="moveCustomMoney('${asset.id}')">Go</button>
+            <button class="btn-minus" data-asset="${asset.id}" data-amount="-1000" title="1000 € aus dieser Anlage entnehmen">−</button>
+            <button class="btn-plus" data-asset="${asset.id}" data-amount="1000" title="1000 € in diese Anlage investieren">+</button>
+            <input type="number" step="1" placeholder="Tausend (+/-)" class="custom-amount" data-asset="${asset.id}">
+            <button class="btn-custom" data-asset="${asset.id}" title="Betrag investieren/entnehmen">Go</button>
           </div>
           ` : ''}
         </div>
@@ -138,7 +138,8 @@ function moveMoney(assetId, amount) {
 }
 
 function moveCustomMoney(assetId) {
-  const input = $(`custom-${assetId}`);
+  const input = document.querySelector(`.custom-amount[data-asset="${assetId}"]`);
+  if (!input) return;
   const thousands = parseInt(input.value);
   if (isNaN(thousands) || thousands === 0) return;
   const amount = thousands * 1000;
@@ -337,5 +338,25 @@ $("endRestartBtn").addEventListener("click", () => {
   resetGame();
 });
 window.addEventListener("resize", drawChart);
+
+$("assets").addEventListener("click", e => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  const assetId = btn.dataset.asset;
+  if (!assetId) return;
+  if (btn.classList.contains("btn-minus")) {
+    moveMoney(assetId, -1000);
+  } else if (btn.classList.contains("btn-plus")) {
+    moveMoney(assetId, 1000);
+  } else if (btn.classList.contains("btn-custom")) {
+    moveCustomMoney(assetId);
+  }
+});
+
+$("assets").addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.classList.contains("custom-amount")) {
+    moveCustomMoney(e.target.dataset.asset);
+  }
+});
 
 init();
