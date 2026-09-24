@@ -1,0 +1,6 @@
+{
+  "startCapital": 100000,
+  "rounds": 8,
+  "retirementStart": 3,
+  "endMessage": "Die Simulation ist beendet. Vergleicht nun, wie sich unterschiedliche Anlageentscheidungen auf das verbleibende Vermögen ausgewirkt haben."
+}

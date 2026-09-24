@@ -1,0 +1,170 @@
+[
+  {
+    "round": 1,
+    "title": "Berufsleben: Start",
+    "description": "Du beginnst mit deinem Startkapital. Einkommen und Ausgaben werden am Ende der Runde berücksichtigt.",
+    "income": 3500,
+    "expenses": 2500,
+    "code": "1842",
+    "events": [
+      {
+        "title": "Wirtschaftswachstum",
+        "message": "Die Wirtschaft wächst. Unternehmen investieren und die Stimmung an den Märkten verbessert sich.",
+        "icon": "↗",
+        "changes": {
+          "etf": 5,
+          "stocks": 8,
+          "realEstate": 2,
+          "fixedInterest": 0
+        }
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "title": "Berufsleben: Immobilienboom",
+    "description": "Du bist noch im Berufsleben. Das Einkommen übersteigt die Ausgaben.",
+    "income": 3500,
+    "expenses": 2500,
+    "code": "5271",
+    "events": [
+      {
+        "title": "Immobilienboom",
+        "message": "Durch die steigende Zahl an Studierenden ist die Nachfrage nach Wohnraum gestiegen.",
+        "icon": "⌂",
+        "changes": {
+          "etf": 2,
+          "stocks": 3,
+          "realEstate": 12,
+          "fixedInterest": 0
+        }
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "title": "Ruhestand: Börsencrash",
+    "description": "Ab jetzt gibt es kein Arbeitseinkommen mehr. Deine Ausgaben bleiben bestehen.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "9036",
+    "events": [
+      {
+        "title": "Börsencrash",
+        "message": "Die Wirtschaft gerät unter Druck. Die Aktienmärkte fallen stark.",
+        "icon": "↘",
+        "changes": {
+          "etf": -15,
+          "stocks": -25,
+          "realEstate": -5,
+          "fixedInterest": 2
+        }
+      }
+    ]
+  },
+  {
+    "round": 4,
+    "title": "Wirtschaftliche Erholung",
+    "description": "Die Wirtschaft stabilisiert sich langsam wieder.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "3418",
+    "events": [
+      {
+        "title": "Erholung",
+        "message": "Die Wirtschaft erholt sich. Unternehmen investieren wieder und die Nachfrage steigt.",
+        "icon": "↗",
+        "changes": {
+          "etf": 10,
+          "stocks": 14,
+          "realEstate": 4,
+          "fixedInterest": 1
+        }
+      }
+    ]
+  },
+  {
+    "round": 5,
+    "title": "Inflation",
+    "description": "Steigende Preise verändern die reale Kaufkraft deines Vermögens.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "7654",
+    "events": [
+      {
+        "title": "Inflation",
+        "message": "Die Preise steigen deutlich. Sichere Anlagen bringen zwar Zinsen, aber die Kaufkraft des Geldes sinkt.",
+        "icon": "€",
+        "changes": {
+          "etf": -2,
+          "stocks": -4,
+          "realEstate": 3,
+          "fixedInterest": 1
+        }
+      }
+    ]
+  },
+  {
+    "round": 6,
+    "title": "Stabile Wirtschaft",
+    "description": "Die Märkte bewegen sich in einem ruhigeren Umfeld.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "2205",
+    "events": [
+      {
+        "title": "Stabile Wirtschaft",
+        "message": "Die wirtschaftliche Lage ist stabil. Die Märkte entwickeln sich moderat.",
+        "icon": "≈",
+        "changes": {
+          "etf": 5,
+          "stocks": 6,
+          "realEstate": 2,
+          "fixedInterest": 2
+        }
+      }
+    ]
+  },
+  {
+    "round": 7,
+    "title": "Immobilienkrise",
+    "description": "Der Immobilienmarkt gerät unter Druck.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "6183",
+    "events": [
+      {
+        "title": "Immobilienkrise",
+        "message": "Finanzierungsprobleme und sinkende Nachfrage belasten den Immobilienmarkt.",
+        "icon": "⌂",
+        "changes": {
+          "etf": -4,
+          "stocks": -7,
+          "realEstate": -18,
+          "fixedInterest": 2
+        }
+      }
+    ]
+  },
+  {
+    "round": 8,
+    "title": "Aufschwung",
+    "description": "Die letzte Runde der Simulation beginnt.",
+    "income": 0,
+    "expenses": 2500,
+    "code": "4829",
+    "events": [
+      {
+        "title": "Aufschwung",
+        "message": "Neue Investitionen sorgen für einen breiten wirtschaftlichen Aufschwung.",
+        "icon": "★",
+        "changes": {
+          "etf": 9,
+          "stocks": 13,
+          "realEstate": 6,
+          "fixedInterest": 2
+        }
+      }
+    ]
+  }
+]

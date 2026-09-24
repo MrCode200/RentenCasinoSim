@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cash",
+    "name": "Bargeld",
+    "startValue": 100000,
+    "interestRate": 0
+  },
+  {
+    "id": "fixedInterest",
+    "name": "Festgeld / sichere Zinsen",
+    "startValue": 0,
+    "interestRate": 2
+  },
+  {
+    "id": "etf",
+    "name": "ETF",
+    "startValue": 0,
+    "interestRate": 0
+  },
+  {
+    "id": "stocks",
+    "name": "Aktien",
+    "startValue": 0,
+    "interestRate": 0
+  },
+  {
+    "id": "realEstate",
+    "name": "Immobilien",
+    "startValue": 0,
+    "interestRate": 0
+  }
+]

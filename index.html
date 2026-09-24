@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>Renten-Kasino</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">FINANZIELLE ALTERSVORSORGE</p>
+        <h1>Renten-Kasino</h1>
+      </div>
+      <div class="top-actions">
+        <div class="round-badge">Runde <strong id="roundNumber">1</strong> / <span id="roundTotal">8</span></div>
+        <button id="restartBtn" class="ghost-btn">↻ Neustart</button>
+      </div>
+    </header>
+
+    <section id="loading" class="loading-card">Simulation wird geladen …</section>
+
+    <section id="game" class="hidden">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <div>
+            <span class="label">Gesamtvermögen</span>
+            <div id="totalWealth" class="hero-value">0 €</div>
+            <div id="wealthChange" class="change neutral">—</div>
+          </div>
+          <div class="hero-side">
+            <span class="label">Phase</span>
+            <strong id="phaseLabel">Berufsleben</strong>
+          </div>
+        </article>
+
+        <div class="income-expense">
+          <div class="stat-card income">
+            <span class="label">Einkommen</span>
+            <strong id="income">0 €</strong>
+          </div>
+          <div class="stat-card expense">
+            <span class="label">Ausgaben</span>
+            <strong id="expenses">0 €</strong>
+          </div>
+          <div class="stat-card">
+            <span class="label">Verfügbares Bargeld</span>
+            <strong id="cash">0 €</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel portfolio-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="label">Portfolio</span>
+              <h2>Deine Anlagen</h2>
+            </div>
+            <span class="hint">Verteile dein verfügbares Geld</span>
+          </div>
+          <div id="assets" class="asset-list"></div>
+        </section>
+
+        <section class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="label">Entwicklung</span>
+              <h2>Vermögensverlauf</h2>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="wealthChart" aria-label="Vermögensentwicklung"></canvas>
+          </div>
+        </section>
+      </div>
+
+      <section class="round-controls panel">
+        <div>
+          <span class="label">Aktuelle Runde</span>
+          <h2 id="roundTitle">Runde 1</h2>
+          <p id="roundDescription">Deine Simulation beginnt.</p>
+        </div>
+        <button id="finishRoundBtn" class="primary-btn">Runde abschließen →</button>
+      </section>
+    </section>
+  </main>
+
+  <div id="eventOverlay" class="overlay hidden">
+    <div class="modal event-modal">
+      <div class="event-count" id="eventCount">EVENT</div>
+      <div id="eventIcon" class="event-icon">◈</div>
+      <h2 id="eventTitle">Ereignis</h2>
+      <p id="eventMessage"></p>
+      <div id="eventChanges" class="event-changes"></div>
+      <button id="eventNextBtn" class="primary-btn">Weiter →</button>
+    </div>
+  </div>
+
+  <div id="codeOverlay" class="overlay hidden">
+    <div class="modal code-modal">
+      <div class="event-count">RUNDE ABSCHLIESSEN</div>
+      <h2>Code eingeben</h2>
+      <p id="codePrompt">Gib den Code ein, der für diese Runde angezeigt wurde.</p>
+      <input id="roundCode" type="text" inputmode="numeric" autocomplete="off" placeholder="Code">
+      <p id="codeError" class="error-text hidden">Falscher Code. Bitte erneut versuchen.</p>
+      <button id="codeSubmitBtn" class="primary-btn">Bestätigen</button>
+    </div>
+  </div>
+
+  <div id="endOverlay" class="overlay hidden">
+    <div class="modal end-modal">
+      <div class="event-count">SIMULATION BEENDET</div>
+      <h2>Renten-Kasino</h2>
+      <p id="finalMessage"></p>
+      <div id="finalWealth" class="final-value">0 €</div>
+      <button id="endRestartBtn" class="primary-btn">Neue Simulation</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
