@@ -5,7 +5,7 @@
     "description": "Du beginnst mit deinem Startkapital. Einkommen und Ausgaben werden am Ende der Runde berücksichtigt.",
     "income": 3500,
     "expenses": 2500,
-    "code": "1842",
+    "code": "0",
     "events": [
       {
         "title": "Wirtschaftswachstum",
@@ -26,7 +26,7 @@
     "description": "Du bist noch im Berufsleben. Das Einkommen übersteigt die Ausgaben.",
     "income": 3500,
     "expenses": 2500,
-    "code": "5271",
+    "code": "0",
     "events": [
       {
         "title": "Immobilienboom",
@@ -47,7 +47,7 @@
     "description": "Ab jetzt gibt es kein Arbeitseinkommen mehr. Deine Ausgaben bleiben bestehen.",
     "income": 0,
     "expenses": 2500,
-    "code": "9036",
+    "code": "0",
     "events": [
       {
         "title": "Börsencrash",
@@ -68,7 +68,7 @@
     "description": "Die Wirtschaft stabilisiert sich langsam wieder.",
     "income": 0,
     "expenses": 2500,
-    "code": "3418",
+    "code": "0",
     "events": [
       {
         "title": "Erholung",
@@ -89,7 +89,7 @@
     "description": "Steigende Preise verändern die reale Kaufkraft deines Vermögens.",
     "income": 0,
     "expenses": 2500,
-    "code": "7654",
+    "code": "0",
     "events": [
       {
         "title": "Inflation",

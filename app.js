@@ -92,6 +92,7 @@ function renderAssets() {
   $("assets").innerHTML = CONFIG.assets.map(asset => {
     const value = state.portfolio[asset.id] || 0;
     const percentage = Math.max(0, Math.min(100, value / total * 100));
+    const isCash = asset.id === "cash";
     return `
       <div class="asset-row">
         <div class="asset-top">
@@ -100,10 +101,14 @@ function renderAssets() {
         </div>
         <div class="asset-bottom">
           <div class="asset-bar"><span style="width:${percentage}%"></span></div>
+          ${!isCash ? `
           <div class="asset-actions">
-            <button title="100 € aus dieser Anlage entnehmen" onclick="moveMoney('${asset.id}', -100)">−</button>
-            <button title="100 € in diese Anlage investieren" onclick="moveMoney('${asset.id}', 100)">+</button>
+            <button title="1000 € aus dieser Anlage entnehmen" onclick="moveMoney('${asset.id}', -1000)">−</button>
+            <button title="1000 € in diese Anlage investieren" onclick="moveMoney('${asset.id}', 1000)">+</button>
+            <input type="number" step="1" placeholder="Tausend (+/-)" class="custom-amount" id="custom-${asset.id}" onkeydown="if(event.key==='Enter') moveCustomMoney('${asset.id}')">
+            <button title="Betrag investieren/entnehmen" onclick="moveCustomMoney('${asset.id}')">Go</button>
           </div>
+          ` : ''}
         </div>
       </div>
     `;
@@ -132,6 +137,15 @@ function moveMoney(assetId, amount) {
   render();
 }
 
+function moveCustomMoney(assetId) {
+  const input = $(`custom-${assetId}`);
+  const thousands = parseInt(input.value);
+  if (isNaN(thousands) || thousands === 0) return;
+  const amount = thousands * 1000;
+  input.value = "";
+  moveMoney(assetId, amount);
+}
+
 function finishRound() {
   if (state.locked) return;
   state.locked = true;
@@ -144,24 +158,35 @@ function finishRound() {
 
   eventQueue = round.events || [];
   currentEventIndex = 0;
-  showNextEvent();
+  showCodeOverlay();
 }
 
 function showNextEvent() {
   if (currentEventIndex >= eventQueue.length) {
+    $("eventOverlay").classList.add("hidden");
     applyMarketChanges();
     state.history.push(totalWealth());
     state.locked = false;
     render();
-    showCodeOverlay();
+
+    if (state.round >= CONFIG.game.rounds) {
+      showEnd();
+      return;
+    }
+
+    state.round++;
+    render();
     return;
   }
 
   const event = eventQueue[currentEventIndex];
+  const round = getRound();
   $("eventCount").textContent = `EVENT ${currentEventIndex + 1} / ${eventQueue.length}`;
   $("eventTitle").textContent = event.title;
   $("eventMessage").textContent = event.message;
   $("eventIcon").textContent = event.icon || "◈";
+  $("roundInfoTitle").textContent = round.title || `Runde ${state.round}`;
+  $("roundInfoDescription").textContent = round.description || "";
 
   $("eventChanges").innerHTML = Object.entries(event.changes || {}).map(([id, change]) => {
     const asset = CONFIG.assets.find(a => a.id === id);
@@ -209,15 +234,7 @@ function submitCode() {
   }
 
   $("codeOverlay").classList.add("hidden");
-
-  if (state.round >= CONFIG.game.rounds) {
-    showEnd();
-    return;
-  }
-
-  state.round++;
-  state.locked = false;
-  render();
+  showNextEvent();
 }
 
 function showEnd() {
@@ -259,6 +276,9 @@ function drawChart() {
     ctx.fillText(formatCompact(val), 5, y + 4);
   }
 
+  const xFor = i => pad.left + (w - pad.left - pad.right) * i / (values.length - 1);
+  const valueY = value => pad.top + (max - value) / range * (h - pad.top - pad.bottom);
+
   if (values.length === 1) {
     const x = pad.left;
     const y = valueY(values[0]);
@@ -266,9 +286,6 @@ function drawChart() {
     ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fill();
     return;
   }
-
-  const xFor = i => pad.left + (w - pad.left - pad.right) * i / (values.length - 1);
-  const valueY = value => pad.top + (max - value) / range * (h - pad.top - pad.bottom);
 
   ctx.strokeStyle = "#7dd3fc";
   ctx.lineWidth = 3;
@@ -287,9 +304,6 @@ function drawChart() {
     ctx.fillText(i === 0 ? "Start" : `R${i}`, x - 10, h - 10);
   });
 
-  function valueY(value) {
-    return pad.top + (max - value) / range * (h - pad.top - pad.bottom);
-  }
 }
 
 function formatCompact(value) {
@@ -310,6 +324,10 @@ $("eventNextBtn").addEventListener("click", () => {
   showNextEvent();
 });
 $("codeSubmitBtn").addEventListener("click", submitCode);
+$("codeCloseBtn").addEventListener("click", () => {
+  $("codeOverlay").classList.add("hidden");
+  state.locked = false;
+});
 $("roundCode").addEventListener("keydown", e => {
   if (e.key === "Enter") submitCode();
 });
